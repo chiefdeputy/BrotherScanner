@@ -1,0 +1,23 @@
+---
+version: '3.3'
+services:
+  brotherscanner:
+    container_name: brotherscanner
+    environment:
+      - IPADDRESS=192.168.0.44
+      # Macaddr 90:48:9a:12:34:56 wireless
+      #- IPADDRESS="BRW90489A123456"
+      - MODEL=MFC-J425DW
+      - NAME=MFC-J425DW       # name must be a single :alphanum:
+    image: "chickenandporn/brotherscanner:latest"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    network_mode: "host"
+    pid: host        # avoid "su: System error"
+    restart: unless-stopped
+    volumes:
+      # destination of scanned files
+      - /volume1/Scan:/scans

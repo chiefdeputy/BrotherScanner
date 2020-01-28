@@ -1,0 +1,26 @@
+---
+version: '3.3'
+services:
+  brotherscanner:
+    container_name: brotherscanner
+    environment:
+      - IPADDRESS=10.0.0.30
+      # Macaddr 90:48:9a:12:34:56 wireless
+      #- IPADDRESS="BRW90489A123456"
+      - MODEL=MFC-J450DW
+      - FTP_USER="brotherscanner"
+      - FTP_PASSWORD="@e+A^Z"
+      - FTP_HOST="localhost"
+      - FTP_PATH="/volume1/Scans/brscans"
+    image: "chickenandporn/brotherscanner:latest"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "200k"
+        max-file: "10"
+    network_mode: "host"
+    pid: host        # avoid "su: System error"
+    restart: unless-stopped
+    #volumes:
+    # # local workspace is ssh'd off to storage
+    # - /volume1/Scan/brscans:/scans

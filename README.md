@@ -1,11 +1,13 @@
 # Brother Scanner
 This is the dockerized scanner setup for Brother scanners. It allows you to run
 your scan server in a Docker environment and thus also on devices such as a Synology
-DiskStation.
+DiskStation.  Configuring for only one scanner via environment variables, it is obvious and simple
+to configure, but requires organizations with multiple scanners to use multiple docker containers.
 
 ## Requirements
 Take note that the Brother scanner drivers require access to the host network, thus
-the container needs to be started with --net=host. See run.sh for example.
+the container needs to be started with --net=host. The original example is in run.sh, but
+see also examples/docker-compose.yaml for a docker-compose example.
 
 ## Usage
 You can configure the tool via environment variables. The following are required:
@@ -14,7 +16,7 @@ You can configure the tool via environment variables. The following are required
 | ------------- | ------------- |
 | NAME  | Arbitrary name to give your scanner  |
 | MODEL  | Model of your scanner (see Supported Models)  |
-| IPADDRESS | IP Address of your scanner |
+| IPADDRESS | IP Address of your scanner (formats BRN{MACADDR} or BRW{MACADDR} are uses as nodename)|
 
 You may also want to mount a directory to retrieve your data. Scanned files are stored in /root/brscan.
 
