@@ -1,0 +1,26 @@
+# To install the dependencies for this file:
+# pip install pre-commit
+#   (really, "sudo python3 -m pip install pre-commit")
+# pre-commit install --allow-missing-config
+#
+# yamllint to check only this one .precommit file?  Perhaps :)
+# Check all the things!  Check the checkers!
+---
+repos:
+  - repo: https://github.com/adrienverge/yamllint.git
+    rev: v1.11.0
+    hooks:
+      - id: yamllint
+        args: [
+          '-d',
+          '{extends: relaxed, rules: {line-length: {max: 120}}}'
+        ]
+  - repo: https://github.com/IamTheFij/docker-pre-commit.git
+    rev: v1.0.0
+    hooks:
+      - id: docker-compose-check
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+    - id: dockerfilelint
+      stages: [commit]
