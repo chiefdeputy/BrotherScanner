@@ -1,4 +1,7 @@
 # Brother Scanner
+
+(This fork is still under development, doing so publically, but not ready yet for use)
+
 This is the dockerized scanner setup for Brother scanners. It allows you to run
 your scan server in a Docker environment and thus also on devices such as a Synology
 DiskStation.  Configuring for only one scanner via environment variables, it is obvious and simple
