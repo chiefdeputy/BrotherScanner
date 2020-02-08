@@ -42,19 +42,19 @@ fi
 	fi
 	
 	(
-		echo "converting to PDF for $date..."
+		echo "(scantofile) converting to PDF for $date..."
 		ls -al $filename_base*.pnm
 
 		echo command: gm convert -page A4+0+0 $filename_base*.pnm /scans/$date.pdf
 		gm convert -page A4+0+0 $filename_base*.pnm /scans/$date.pdf
-		echo gm result: $?
+		echo gm result: $? /scans/$date.pdf
 
 		if test -n "$SSH_USER"; then
 		echo command: /opt/brother/scanner/brscan-skey/script/trigger_inotify.sh $SSH_USER $SSH_PASSWORD $SSH_HOST $SSH_PATH $date.pdf
 		/opt/brother/scanner/brscan-skey/script/trigger_inotify.sh $SSH_USER $SSH_PASSWORD $SSH_HOST $SSH_PATH $date.pdf
 		echo trigger_notify result: $?
 		else
-		echo no trigger_notify: no SSH_USER given
+		echo no trigger_notify: no SSH_USER given >&2
 		fi
 
 		if test -n "$FTP_USER"; then
