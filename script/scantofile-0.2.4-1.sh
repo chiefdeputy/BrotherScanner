@@ -42,7 +42,7 @@ fi
 	fi
 	
 	(
-		echo "(scantofile) converting to PDF for $date..."
+		echo "(scantofile) Converting to PDF for $date..."
 		ls -al $filename_base*.pnm
 
 		echo command: gm convert -page A4+0+0 $filename_base*.pnm /scans/$date.pdf
