@@ -1,16 +1,16 @@
-FROM ubuntu:xenial-20200114
+FROM ubuntu:xenial
 
 RUN apt-get -y update && apt-get -y install --no-install-recommends sane sane-utils ghostscript netbase netpbm x11-common- wget graphicsmagick curl ssh sshpass && apt-get -y clean && rm -fr /var/lib/apt/lists/*
 
 # brscan doesn't handle when this file doesn't exist so fail-fast (source: netbase.deb)
 RUN test -f /etc/protocols
 
-RUN wget -O /tmp/brscan.deb http://download.brother.com/welcome/dlf006645/brscan4-0.4.8-1.amd64.deb && \
+RUN wget --no-check-certificate -O /tmp/brscan.deb https://download.brother.com/welcome/dlf105200/brscan4-0.4.10-1.amd64.deb && \
     dpkg -i /tmp/brscan.deb && \
     rm /tmp/brscan.deb
 
 RUN cd /tmp && \
-    wget -O /tmp/brscan-skey.deb http://download.brother.com/welcome/dlf006652/brscan-skey-0.2.4-1.amd64.deb && \
+    wget --no-check-certificate -O /tmp/brscan-skey.deb https://download.brother.com/welcome/dlf006652/brscan-skey-0.3.1-2.amd64.deb && \
     dpkg -i /tmp/brscan-skey.deb && \
     rm /tmp/brscan-skey.deb
 
@@ -26,13 +26,13 @@ ADD script/trigger_inotify.sh     /opt/brother/scanner/brscan-skey/script/trigge
 ENV NAME="Scanner"
 
 # Not checked, must match models provided in brascan4
-ENV MODEL="MFC-L2700DW"
+ENV MODEL="MFC-J985DW"
 
 # IP Address or BRW${MAC} (wireless) or BRN${MACaddr} (wired), MAC = uppercase macaddr, no ":"
-ENV IPADDRESS="192.168.1.123"
+ENV IPADDRESS="192.168.12.59"
 
 # This name shows as the destination on the scanner
-ENV USERNAME="NAS"
+ENV USERNAME="storageserver"
 
 # Only set these variables if inotify needs to be triggered (e.g., for CloudStation):
 #ENV SSH_USER="admin"
