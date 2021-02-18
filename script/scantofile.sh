@@ -4,13 +4,13 @@
 #mkdir -p ~/brscan
 sleep 0.2
 
-if [ -e ~/.brscan-skey/scantofile.config ];then
+if [ -e ~/scantofile.config ];then
    source ~/.brscan-skey/scantofile.config
 elif [ -e /etc//opt/brother/scanner/brscan-skey/scantofile.config ];then
    source /etc//opt/brother/scanner/brscan-skey/scantofile.config
 fi
 
-
+echo "Start Scanning to files!"
 
 SCANIMAGE="/opt/brother/scanner/brscan-skey/skey-scanimage"
 OUTPUT=/scans/brscan_"$(date +%Y-%m-%d-%H-%M-%S)".tif

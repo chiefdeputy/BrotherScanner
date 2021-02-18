@@ -2,6 +2,10 @@ set -x
 adduser $USERNAME --disabled-password --force-badname --gecos ""
 mkdir -p /scans
 chmod 777 /scans
+mkdir /script
+chmod 777 /script
+cp -u /opt/brother/scanner/brscan-skey/script/* /script
+
 env > /opt/brother/scanner/env.txt
 case ${IPADDRESS} in
     BR[NW]*)
@@ -22,6 +26,6 @@ su - ${USERNAME} -c '/usr/bin/brscan-skey -f'
 
 while true;
 do
-  sleep 1000
+  sleep 5000
 done
 exit 0

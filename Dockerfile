@@ -15,13 +15,8 @@ RUN cd /tmp && \
     rm /tmp/brscan-skey.deb
 
 ADD files/runScanner.sh /opt/brother/runScanner.sh
-
-#ADD script/scanRear.sh            /opt/brother/scanner/brscan-skey/script/scanRear.sh
-ADD script/scantoemail.sh /opt/brother/scanner/brscan-skey/script/scantoemail.sh
-ADD script/scantofile.sh  /opt/brother/scanner/brscan-skey/script/scantofile.sh
-ADD script/scantoimage.sh /opt/brother/scanner/brscan-skey/script/scantoimage.sh
-ADD script/scantoocr.sh   /opt/brother/scanner/brscan-skey/script/scantoocr.sh
-#ADD script/trigger_inotify.sh     /opt/brother/scanner/brscan-skey/script/trigger_inotify.sh
+ADD files/brscan-skey.config /opt/brother/scanner/brscan-skey/brscan-skey.config
+ADD script/* /opt/brother/scanner/brscan-skey/script/
 
 ENV NAME="Scanner"
 
@@ -54,6 +49,6 @@ EXPOSE 54921
 VOLUME /scans
 
 #directory for config files:
-VOLUME /opt/brother/scanner/brscan-skey/script
+VOLUME /script
 
 CMD /opt/brother/runScanner.sh
